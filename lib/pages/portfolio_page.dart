@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_smooth_wheel_scroll/flutter_smooth_wheel_scroll.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/portfolio_theme.dart';
@@ -30,6 +31,7 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
+  late final SmoothScrollController scrollController;
   final projectsKey = GlobalKey(),
       skillsKey = GlobalKey(),
       experienceKey = GlobalKey();
@@ -44,9 +46,27 @@ class _PortfolioPageState extends State<PortfolioPage> {
   String t(String ru, String en) => widget.english ? en : ru;
 
   @override
+  void initState() {
+    super.initState();
+    scrollController = SmoothScrollController(
+      motion: const WheelMotion.spring(
+        duration: Duration(milliseconds: 460),
+        bounce: 0,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
     body: SelectionArea(
       child: CustomScrollView(
+        controller: scrollController,
         physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),

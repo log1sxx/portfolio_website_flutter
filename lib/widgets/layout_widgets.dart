@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/portfolio_theme.dart';
+import 'scroll_reveal.dart';
 
 class MaxWidth extends StatelessWidget {
   const MaxWidth({super.key, required this.child});
@@ -34,55 +35,57 @@ class PortfolioSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final light = theme.brightness == Brightness.light;
-    return Container(
-      color: dark && !light
-          ? const Color(0xFF090B19)
-          : theme.scaffoldBackgroundColor,
-      child: MaxWidth(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                eyebrow,
-                style: const TextStyle(
-                  color: PortfolioColors.accent,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.8,
-                  fontFamily: PortfolioTypography.headingFamily,
-                ),
-              ),
-              const SizedBox(height: 15),
-              Text(
-                title,
-                style: TextStyle(
-                  color: dark && !light
-                      ? PortfolioColors.ink
-                      : context.portfolioText,
-                  fontSize: 41,
-                  height: 1.1,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -1.4,
-                  fontFamily: PortfolioTypography.headingFamily,
-                ),
-              ),
-              const SizedBox(height: 17),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
-                child: Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: context.portfolioMuted,
-                    fontSize: 18,
-                    height: 1.55,
+    return ScrollReveal(
+      child: Container(
+        color: dark && !light
+            ? const Color(0xFF090B19)
+            : theme.scaffoldBackgroundColor,
+        child: MaxWidth(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 100),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  eyebrow,
+                  style: const TextStyle(
+                    color: PortfolioColors.accent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.8,
+                    fontFamily: PortfolioTypography.headingFamily,
                   ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              child,
-            ],
+                const SizedBox(height: 15),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: dark && !light
+                        ? PortfolioColors.ink
+                        : context.portfolioText,
+                    fontSize: 41,
+                    height: 1.1,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.4,
+                    fontFamily: PortfolioTypography.headingFamily,
+                  ),
+                ),
+                const SizedBox(height: 17),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 720),
+                  child: Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: context.portfolioMuted,
+                      fontSize: 18,
+                      height: 1.55,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 50),
+                child,
+              ],
+            ),
           ),
         ),
       ),
